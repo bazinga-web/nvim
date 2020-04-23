@@ -30,9 +30,21 @@ noremap <LEADER><CR> :nohlsearch<CR>
 noremap = nzz
 noremap - Nzz
 
+" ===
+" " === Cursor Movement
+" " ===
+" " New cursor movement (the default arrow keys are used for resizing windows)
+" "     ^
+" "     i
+" " < j   l >
+" "     k
+" "     v
+
 noremap j h
 noremap k j
 noremap i k
+noremap I 5k
+noremap K 5j
 
 noremap u i
 noremap U u
@@ -54,17 +66,31 @@ map <LEADER>k <C-w>j
 map <LEADER>i <C-w>k
 
 call plug#begin('~/.config/nvim/plugged')
-
+" Editor Enhancement
 Plug 'vim-airline/vim-airline'
 Plug 'connorholyday/vim-snazzy'
+Plug 'preservim/nerdcommenter' " <space>cc comment a line; <space>c<space> toogle; <space>ci invert;
+Plug 'tpope/vim-surround' " with the cursor on 'hello' press cs'` --> `hello` press ds' to remove
+Plug 'jiangmiao/auto-pairs'
+Plug 'godlygeek/tabular'
+Plug 'gcmt/wildfire.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
-
-
-
 
 " ===
 " === snazzy
 " ===
 let g:SnazzyTransparent = 1
 color snazzy
+
+" ===
+" === nerd commmenter
+" ===
+let g:NERDSpaceDelims = 1 " Add spaces after comment delimiters by default
+
+" ===
+" === FZF
+" ===
+noremap <C-p> :Files<CR>
