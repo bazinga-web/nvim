@@ -1,6 +1,6 @@
 " ===
 " === Auto load for first time uses
-" === Attention path
+" === Attention path！！
 " ===
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
 	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
