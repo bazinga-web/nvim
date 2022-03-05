@@ -9,62 +9,103 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 
+" ===
+" === Editor behavior
+" ===
 
-let mapleader = " "
-set number
 syntax on
+set number
+set relativenumber
 set nocursorline
 set wrap
 set showcmd
 set wildmenu
-set hlsearch
-exec "nohlsearch"
-se incsearch
 set ignorecase
 set smartcase
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-
-noremap <LEADER><CR> :nohlsearch<CR>
-
-noremap = nzz
-noremap - Nzz
+set listchars=tab:»■,trail:■
+set list
 
 " ===
-" " === Cursor Movement
-" " ===
-" " New cursor movement (the default arrow keys are used for resizing windows)
-" "     ^
-" "     i
-" " < j   l >
-" "     k
-" "     v
+" === Basic Mappings
+" ===
+let mapleader = " "
+noremap ; :
 
-noremap j h
-noremap k j
-noremap i k
-noremap I 5k
-noremap K 5j
+" Open the config file anytime
+noremap <LEADER>v :e ~/.config/nvim/init.vim<CR>
+noremap <LEADER>z :e ~/.zshrc<CR>
+noremap <LEADER>r :e ~/.config/ranger/rc.conf<CR>
 
-noremap u i
-noremap U u
+" ===
+" === Cursor Movement
+" ===
 
+" (faster navigation)
+noremap <silent> K 5k
+noremap <silent> J 5j
+
+" H key: go to the start of the line
+noremap <silent> H ^
+" L key: go to the end of the line
+noremap <silent> L $
+
+" save & quit
 map Q :q<CR>
 map S :w<CR>
 map R :source $MYVIMRC<CR>
-map ; :
 
-map sl :set splitright<CR>:vsplit<CR>
-map sj :set nosplitright<CR>:vsplit<CR>
-map si :set nosplitbelow<CR>:split<CR>
-map sk :set splitbelow<CR>:split<CR>
+" search
+set hlsearch
+set incsearch
+exec "nohlsearch"
+noremap <LEADER><CR> :nohlsearch<CR>
+noremap = nzz
+noremap - Nzz
 
-" change cursor position
+" make Y to copy till the end of the line
+nnoremap Y y$
+
+" Copy to system clipboard
+vnoremap Y "+y
+
+" Indentation
+nnoremap < <<
+nnoremap > >>
+set shiftwidth=2
+set autoindent
+
+" ===
+" === Window management
+" ===
+
+" Use <space> + new arrow keys for moving the cursor around windows
+map <LEADER>w <C-w>w
 map <LEADER>l <C-w>l
-map <LEADER>j <C-w>h
-map <LEADER>k <C-w>j
-map <LEADER>i <C-w>k
+map <LEADER>h <C-w>h
+map <LEADER>j <C-w>j
+map <LEADER>k <C-w>k
+
+
+" split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
+map sl :set splitright<CR>:vsplit<CR>
+map sh :set nosplitright<CR>:vsplit<CR>
+map sk :set nosplitbelow<CR>:split<CR>
+map sj :set splitbelow<CR>:split<CR>
+
+" Disable the default `s` key
+map s <nop>
+
+" Place the two screens up and down
+noremap sh <C-w>t<C-w>K
+" Place the two screens side by side
+noremap sv <C-w>t<C-w>H
+
+
+" find and replace
+noremap \s :%s//g<left><left>
 
 call plug#begin('~/.config/nvim/plugged')
 " Editor Enhancement
